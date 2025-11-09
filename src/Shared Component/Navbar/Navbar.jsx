@@ -4,13 +4,15 @@ import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 import Loader from "../Loader/Loader";
+import MainIcon from "../Icon/MainIcon";
 
 const Navbar = () => {
   const { user, signOutUser, loading } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [profileOpen, setProfileOpen] = useState(false);
 
-  // Sync theme with HTML attribute for Tailwind/DaisyUI
+  // Sync theme with Tailwind/DaisyUI
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
@@ -100,16 +102,9 @@ const Navbar = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="navbar  w-full  transition-colors duration-300">
+    <div className="navbar w-full transition-colors duration-300">
       {/* Left: Logo */}
-      <div className="navbar-start">
-        <Link
-          to="/"
-          className="btn btn-ghost hover:bg-transparent pl-0 text-xl font-bold tracking-wide"
-        >
-          🎬 <span className="text-primary">MovieMaster</span> Pro
-        </Link>
-      </div>
+      <MainIcon />
 
       {/* Center: Desktop Menu */}
       <div className="navbar-center hidden lg:flex">
@@ -117,11 +112,11 @@ const Navbar = () => {
       </div>
 
       {/* Right */}
-      <div className="navbar-end flex items-center gap-2">
-        {/* Theme toggle */}
+      <div className="navbar-end flex items-center gap-2 relative">
+        {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className="btn btn-ghost btn-sm  lg:flex"
+          className="btn btn-ghost btn-sm lg:flex"
           aria-label="Toggle Theme"
         >
           {theme === "light" ? (
@@ -131,27 +126,42 @@ const Navbar = () => {
           )}
         </button>
 
-        {/* Desktop Auth Buttons */}
+        {/* Auth Section */}
         {user ? (
-          <div className="hidden lg:flex items-center gap-3">
-            <div className="relative group cursor-pointer">
-              <img
-                src={
-                  user.photoURL || "https://i.ibb.co/2FsfXqM/default-avatar.png"
-                }
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full border border-gray-400"
-              />
-              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-sm opacity-0 group-hover:opacity-100 transition-opacity bg-base-200 dark:bg-base-300 rounded px-2 py-1">
-                {user.displayName || "User"}
-              </span>
+          <div className="hidden lg:flex items-center gap-3 cursor-pointer">
+            {/* Profile Dropdown */}
+            <div className="relative cursor-pointer">
+              <button
+                onClick={() => setProfileOpen(!profileOpen)}
+                className="focus:outline-none"
+              >
+                <img
+                  src={
+                    user.photoURL || "https://i.ibb.co/2FsfXqM/default-avatar.png"
+                  }
+                  alt="User Avatar"
+                  className="w-10 h-10 rounded-full border border-gray-400 cursor-pointer"
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              {profileOpen && (
+                <div className="absolute right-0 mt-3 w-56 bg-base-100 dark:bg-base-200 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg p-4 z-50">
+                  <p className="font-semibold text-gray-800 dark:text-white">
+                    {user.displayName || "User"}
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-white mb-3">
+                    {user.email}
+                  </p>
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-error btn-sm w-full text-white"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
-            <button
-              onClick={handleLogout}
-              className="btn btn-sm btn-error text-white"
-            >
-              Logout
-            </button>
           </div>
         ) : (
           <div className="hidden lg:flex gap-2">
@@ -190,7 +200,7 @@ const Navbar = () => {
         {/* Menu Items */}
         <ul className="menu text-lg space-y-2 text-center">{navItems}</ul>
 
-        {/* Auth Buttons */}
+        {/* Auth Buttons (Mobile) */}
         <div className="mt-8 flex flex-col items-center gap-3">
           {!user ? (
             <>
@@ -221,8 +231,6 @@ const Navbar = () => {
             </button>
           )}
         </div>
-
-       
       </div>
     </div>
   );

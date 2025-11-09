@@ -15,17 +15,22 @@ const MainLayout = () => {
         </Wrapper>
       </div>
 
-      {/* Spacer to avoid content hidden under fixed navbar */}
+      {/* Spacer to prevent content from being hidden under navbar */}
       <div className="h-[72px] lg:h-[80px]"></div>
 
-      {/* Page content */}
-      <Outlet />
+      {/* Main Page Content */}
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
 
-      {/* Footer */}
+      {/* Footer Section */}
+      <div className="bg-base-200 dark:bg-base-200 py-10 mt-10">
+        <Wrapper>
+          <Footer />
+        </Wrapper>
+      </div>
 
-      <Footer/>
-
-      {/* Toast notifications */}
+      {/* Toast Notifications */}
       <ToastContainer
         position="top-right"
         autoClose={3000}
