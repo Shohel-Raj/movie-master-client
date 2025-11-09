@@ -19,12 +19,12 @@ const MainLayout = () => {
       {/* <div className="h-[72px] lg:h-[80px]"></div> */}
 
       {/* Main Page Content */}
-      <div className="min-h-screen">
+      <div >
         <Outlet />
       </div>
 
       {/* Footer Section */}
-      <div className="bg-base-200 dark:bg-base-200 py-10 mt-10">
+      <div className="bg-base-200 dark:bg-base-200 py-10 mt-2">
         <Wrapper>
           <Footer />
         </Wrapper>
