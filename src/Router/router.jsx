@@ -3,13 +3,14 @@ import MainLayout from "../Layout/MainLayout";
 import ErrorPage from "../Shared Component/Error/ErrorPage";
 import Home from "../Pages/Home";
 import ProtectedRouts from "./ProtectedRouts";
-import Movies from "../Pages/movies";
 import MyCollection from "../Pages/MyCollection";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
 import WatchList from "../Pages/WatchList";
 import MovieDetails from "../Pages/MovieDetails";
 import AddMovie from "../Pages/AddMovie";
+import Movies from "../Pages/Movies";
+import UpdateMovie from "../Pages/UpdateMovie";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRouts>
             <MovieDetails />
+          </ProtectedRouts>
+        ),
+      },
+      {
+        path: "/movies/update/:id",
+        element: (
+          <ProtectedRouts>
+            <UpdateMovie />
           </ProtectedRouts>
         ),
       },

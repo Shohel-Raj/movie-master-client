@@ -9,9 +9,10 @@ const MyCollection = () => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const { user, loading } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
 
   useEffect(() => {
-    
     // 🔹 Uncomment when backend is ready
     /*
     fetch("/api/movies/my-collection")
@@ -38,7 +39,7 @@ const MyCollection = () => {
       },
     ];
     setMovies(dummyData);
-  }, [user,loading]);
+  }, [user, loading]);
 
   const handleDelete = (id) => {
     // 🔹 Uncomment when backend is ready
@@ -53,9 +54,17 @@ const MyCollection = () => {
     */
     setMovies((prev) => prev.filter((movie) => movie._id !== id));
     toast.success("Movie deleted (dummy)");
+    setShowModal(false);
+    setSelectedMovieId(null);
   };
-  if(loading){
-    return <Loader/>
+
+  const confirmDelete = (id) => {
+    setSelectedMovieId(id);
+    setShowModal(true);
+  };
+
+  if (loading) {
+    return <Loader />;
   }
 
   if (movies.length === 0) {
@@ -129,7 +138,7 @@ const MyCollection = () => {
                         Update
                       </button>
                       <button
-                        onClick={() => handleDelete(movie._id)}
+                        onClick={() => confirmDelete(movie._id)}
                         className="btn btn-ghost btn-xs btn-error"
                       >
                         Delete
@@ -140,6 +149,38 @@ const MyCollection = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Delete Confirmation Modal */}
+          {showModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+              <div className="bg-base-200 dark:bg-base-300 p-6 rounded-2xl shadow-lg w-96">
+                <h3 className="text-xl font-bold text-primary mb-4">
+                  Confirm Deletion
+                </h3>
+                <p className="text-base-content/70 mb-6">
+                  Are you sure you want to delete this movie? This action cannot
+                  be undone.
+                </p>
+                <div className="flex justify-end gap-4">
+                  <button
+                    className="btn btn-outline"
+                    onClick={() => {
+                      setShowModal(false);
+                      setSelectedMovieId(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="btn btn-error"
+                    onClick={() => handleDelete(selectedMovieId)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </Wrapper>
     </div>

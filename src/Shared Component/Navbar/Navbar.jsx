@@ -91,7 +91,7 @@ const Navbar = () => {
               }
               onClick={() => setMenuOpen(false)}
             >
-              My Collection
+              Add Movie
             </NavLink>
           </li>
           <li>
