@@ -9,7 +9,7 @@ const Loader = ({ size = 15, color }) => {
   const loaderColor = color || (isDarkMode ? "#00e6e6" : "#36d7b7");
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-base-100 dark:bg-base-200 transition-colors duration-300">
+    <div className="flex flex-col items-center justify-center h-screen   transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

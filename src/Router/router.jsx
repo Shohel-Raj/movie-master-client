@@ -8,6 +8,7 @@ import MyCollection from "../Pages/MyCollection";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
 import WatchList from "../Pages/WatchList";
+import MovieDetails from "../Pages/MovieDetails";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRouts>
             <WatchList />
+          </ProtectedRouts>
+        ),
+      },
+      {
+        path: "/movies/:id",
+        element: (
+          <ProtectedRouts>
+            <MovieDetails />
           </ProtectedRouts>
         ),
       },

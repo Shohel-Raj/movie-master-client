@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <>
       {/* Fixed Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-base-100 dark:bg-base-200 shadow-sm">
+      <div className="fixed top-0 left-0 right-0 z-50  bg-base-100 dark:bg-base-200 shadow-sm">
         <Wrapper>
           <Navbar />
         </Wrapper>
