@@ -16,7 +16,7 @@ const MainLayout = () => {
       </div>
 
       {/* Spacer to prevent content from being hidden under navbar */}
-      <div className="h-[72px] lg:h-[80px]"></div>
+      {/* <div className="h-[72px] lg:h-[80px]"></div> */}
 
       {/* Main Page Content */}
       <div className="min-h-screen">
