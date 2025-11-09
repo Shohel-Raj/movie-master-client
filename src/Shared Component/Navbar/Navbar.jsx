@@ -81,6 +81,21 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink
+              to="/add-movies"
+              className={({ isActive }) =>
+                `font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-gray-600 dark:text-gray-300 hover:text-primary"
+                }`
+              }
+              onClick={() => setMenuOpen(false)}
+            >
+              My Collection
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/movies/my-watchlist"
               className={({ isActive }) =>
                 `font-medium transition-colors duration-200 ${

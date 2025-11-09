@@ -9,6 +9,7 @@ import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
 import WatchList from "../Pages/WatchList";
 import MovieDetails from "../Pages/MovieDetails";
+import AddMovie from "../Pages/AddMovie";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRouts>
             <MovieDetails />
+          </ProtectedRouts>
+        ),
+      },
+      {
+        path: "/add-movies",
+        element: (
+          <ProtectedRouts>
+            <AddMovie />
           </ProtectedRouts>
         ),
       },
