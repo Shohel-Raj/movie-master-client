@@ -5,74 +5,19 @@ import { useInView } from "react-intersection-observer";
 import MovieCard from "../MovieCard";
 
 const TopRatedMovies = () => {
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      title: "The Dark Knight",
-      rating: 9.0,
-      genre: "Action",
-      releaseYear: 2010,
-      poster:
-        "https://m.media-amazon.com/images/I/51k0qa6q3WL._AC_SY679_.jpg",
-    },
-    {
-      id: 2,
-      title: "Inception",
-      rating: 8.8,
-      genre: "Sci-Fi",
-      releaseYear: 2010,
-      poster:
-        "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg",
-    },
-    {
-      id: 3,
-      title: "Interstellar",
-      rating: 8.6,
-      releaseYear: 2010,
-      genre: "Adventure",
-      poster:
-        "https://m.media-amazon.com/images/I/71n58iFZ1zL._AC_SY679_.jpg",
-    },
-    {
-      id: 4,
-      title: "The Shawshank Redemption",
-      rating: 9.3,
-      genre: "Drama",
-      releaseYear: 2010,
-      poster:
-        "https://m.media-amazon.com/images/I/51NiGlapXlL._AC_SY679_.jpg",
-    },
-    {
-      id: 5,
-      title: "Avengers: Endgame",
-      rating: 8.4,
-      genre: "Action",
-      releaseYear: 2010,
-      poster:
-        "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SY679_.jpg",
-    },
-    {
-      id: 6,
-      title: "The Godfather",
-      rating: 9.2,
-      genre: "Crime",
-      releaseYear: 2010,
-      poster:
-        "https://m.media-amazon.com/images/I/71xZ+8L1cRL._AC_SY679_.jpg",
-    },
-  ]);
+  const [movies, setMovies] = useState([ ]);
 
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
-  // 🔹 Fetch from database (Uncomment when backend ready)
-  /*
+ 
+
   useEffect(() => {
     const fetchTopMovies = async () => {
       try {
-        const res = await fetch("https://your-backend-api.com/top-rated");
+        const res = await fetch("http://localhost:3000/top-rated");
         const data = await res.json();
         setMovies(data.slice(0, 6));
       } catch (err) {
@@ -81,7 +26,7 @@ const TopRatedMovies = () => {
     };
     fetchTopMovies();
   }, []);
-  */
+
 
   return (
     <section

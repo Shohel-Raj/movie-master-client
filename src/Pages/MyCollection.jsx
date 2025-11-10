@@ -14,48 +14,35 @@ const MyCollection = () => {
 
   useEffect(() => {
     // 🔹 Uncomment when backend is ready
-    /*
-    fetch("/api/movies/my-collection")
+    
+    fetch(`http://localhost:3000/my-collection/${user?.email}`)
       .then(res => res.json())
       .then(data => setMovies(data))
       .catch(err => console.error(err));
-    */
+  
 
-    // 🔹 Dummy data for now
-    const dummyData = [
-      {
-        _id: 1,
-        title: "Inception",
-        genre: "Sci-Fi",
-        releaseYear: 2010,
-        posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
-      },
-      {
-        _id: 2,
-        title: "The Dark Knight",
-        genre: "Action",
-        releaseYear: 2008,
-        posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
-      },
-    ];
-    setMovies(dummyData);
+   
   }, [user, loading]);
 
   const handleDelete = (id) => {
-    // 🔹 Uncomment when backend is ready
-    /*
-    fetch(`/api/movies/${id}`, { method: "DELETE" })
+ 
+    fetch(`http://localhost:3000/movies/${id}`, { method: "DELETE" })
       .then(res => res.json())
       .then(() => {
         setMovies(prev => prev.filter(movie => movie._id !== id));
+        setShowModal(false);
         toast.success("Movie deleted");
       })
-      .catch(err => toast.error("Failed to delete"));
-    */
-    setMovies((prev) => prev.filter((movie) => movie._id !== id));
-    toast.success("Movie deleted (dummy)");
-    setShowModal(false);
-    setSelectedMovieId(null);
+      .catch((err) =>{ toast.error("Failed to delete")
+        setShowModal(false);
+      }
+      
+    );
+
+    // setMovies((prev) => prev.filter((movie) => movie._id !== id));
+    // toast.success("Movie deleted (dummy)");
+    // 
+    // setSelectedMovieId(null);
   };
 
   const confirmDelete = (id) => {

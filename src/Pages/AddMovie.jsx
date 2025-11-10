@@ -38,19 +38,18 @@ const AddMovie = () => {
     // 🔹 Simulate backend submission
     setTimeout(() => {
       // 🔹 Uncomment for real backend submission
-      /*
-      fetch("/api/movies/add", {
+
+      fetch("http://localhost:3000/movies", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSubmit),
       })
         .then(res => res.json())
         .then(data => {
           toast.success("Movie added successfully!");
         })
         .catch(err => toast.error("Failed to add movie"));
-      */
-      toast.success("Movie added (dummy)");
+
 
       // Reset form after submission
       setFormData({

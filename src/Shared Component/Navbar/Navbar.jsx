@@ -12,6 +12,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [profileOpen, setProfileOpen] = useState(false);
 
+  console.log(user)
   // Sync theme with Tailwind/DaisyUI
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);

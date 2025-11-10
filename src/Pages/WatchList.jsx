@@ -1,98 +1,101 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Wrapper from "../Shared Component/Wraper/Wraper";
+import { AuthContext } from "../context/AuthContext";
 
 const WatchList = () => {
   const navigate = useNavigate();
   const [watchlist, setWatchlist] = useState([]);
+    const { user} = useContext(AuthContext);
+  
 
   useEffect(() => {
-    // 🔹 Uncomment this when backend is ready
-    /*
-    fetch("/api/watchlist")
+   
+    
+    fetch(`http://localhost:3000/watchlist/${user?.email}`)
       .then(res => res.json())
       .then(data => setWatchlist(data))
       .catch(err => console.error(err));
-    */
+    
 
-    // 🔹 Dummy data for now
-    const dummyData = [
-      {
-        _id: 1,
-        title: "Inception",
-        genre: "Sci-Fi",
-        releaseYear: 2010,
-        posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
-      },
-      {
-        _id: 2,
-        title: "The Dark Knight",
-        genre: "Action",
-        releaseYear: 2008,
-        posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
-      },
-      {
-        _id: 3,
-        title: "Inception",
-        genre: "Sci-Fi",
-        releaseYear: 2010,
-        posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
-      },
-      {
-        _id: 4,
-        title: "The Dark Knight",
-        genre: "Action",
-        releaseYear: 2008,
-        posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
-      },
-      {
-        _id: 5,
-        title: "Inception",
-        genre: "Sci-Fi",
-        releaseYear: 2010,
-        posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
-      },
-      {
-        _id: 6,
-        title: "The Dark Knight",
-        genre: "Action",
-        releaseYear: 2008,
-        posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
-      },
-      {
-        _id: 7,
-        title: "Inception",
-        genre: "Sci-Fi",
-        releaseYear: 2010,
-        posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
-      },
-      {
-        _id: 8,
-        title: "The Dark Knight",
-        genre: "Action",
-        releaseYear: 2008,
-        posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
-      },
-    ];
-    setWatchlist(dummyData);
-  }, []);
+    // // 🔹 Dummy data for now
+    // const dummyData = [
+    //   {
+    //     _id: 1,
+    //     title: "Inception",
+    //     genre: "Sci-Fi",
+    //     releaseYear: 2010,
+    //     posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
+    //   },
+    //   {
+    //     _id: 2,
+    //     title: "The Dark Knight",
+    //     genre: "Action",
+    //     releaseYear: 2008,
+    //     posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
+    //   },
+    //   {
+    //     _id: 3,
+    //     title: "Inception",
+    //     genre: "Sci-Fi",
+    //     releaseYear: 2010,
+    //     posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
+    //   },
+    //   {
+    //     _id: 4,
+    //     title: "The Dark Knight",
+    //     genre: "Action",
+    //     releaseYear: 2008,
+    //     posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
+    //   },
+    //   {
+    //     _id: 5,
+    //     title: "Inception",
+    //     genre: "Sci-Fi",
+    //     releaseYear: 2010,
+    //     posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
+    //   },
+    //   {
+    //     _id: 6,
+    //     title: "The Dark Knight",
+    //     genre: "Action",
+    //     releaseYear: 2008,
+    //     posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
+    //   },
+    //   {
+    //     _id: 7,
+    //     title: "Inception",
+    //     genre: "Sci-Fi",
+    //     releaseYear: 2010,
+    //     posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
+    //   },
+    //   {
+    //     _id: 8,
+    //     title: "The Dark Knight",
+    //     genre: "Action",
+    //     releaseYear: 2008,
+    //     posterUrl: "https://i.ibb.co/qmDfWzB/movie3.jpg",
+    //   },
+    // ];
+    // setWatchlist(dummyData);
+  }, [user]);
 
   const handleRemove = (id) => {
-    // 🔹 Uncomment when backend is ready
-    /*
-    fetch(`/api/watchlist/${id}`, { method: "DELETE" })
+
+    fetch(`http://localhost:3000/watchlist/${id}`, { method: "DELETE" })
       .then(res => res.json())
       .then(() => {
         setWatchlist(prev => prev.filter(movie => movie._id !== id));
         toast.success("Removed from watchlist");
       })
       .catch(err => toast.error("Failed to remove"));
-    */
-    setWatchlist((prev) => prev.filter((movie) => movie._id !== id));
-    toast.success("Removed from watchlist (dummy)");
-  };
 
+   
+  };
+ const handleDetails = (id)=>{
+  navigate(`/movies/${id}`)
+ }
   if (watchlist.length === 0) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center mt-10 gap-6 bg-base-100 dark:bg-base-200 transition-colors duration-300 px-6">
@@ -162,6 +165,12 @@ const WatchList = () => {
                         className="btn btn-ghost btn-xs btn-error"
                       >
                         Remove
+                      </button>
+                      <button
+                        onClick={() => handleDetails(movie.movieId)}
+                        className="btn btn-primary btn-xs btn-error"
+                      >
+                        Details
                       </button>
                     </th>
                   </tr>

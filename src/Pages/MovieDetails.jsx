@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import Loader from "../Shared Component/Loader/Loader";
 import Wrapper from "../Shared Component/Wraper/Wraper";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -10,48 +11,65 @@ const MovieDetails = () => {
   const [loadingMovie, setLoading] = useState(true);
   const [watchlistAdded, setWatchlistAdded] = useState(false);
   const { user,  loading } = useContext(AuthContext);
-
   // 🔹 Simulate current user (replace with actual auth in production)
   const currentUser = user?.email; 
-  // For dummy data, let's assume movie owner id
   useEffect(() => {
-    // 🔹 Uncomment when backend is ready
-    /*
-    fetch(`https://your-api-url.com/api/movies/${id}`)
+
+    fetch(`http://localhost:3000/movies/${id}`)
       .then(res => res.json())
       .then(data => setMovie(data))
       .catch(err => console.error("Error fetching movie details"))
       .finally(() => setLoading(false));
-    */
 
-    // 🔹 Dummy data for now
-    const dummyMovie = {
-      _id: id,
-      title: "Inception",
-      genre: "Sci-Fi",
-      releaseYear: 2010,
-      rating: 8.8,
-      duration: 148,
-      director: "Christopher Nolan",
-      cast: "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
-      plotSummary:
-        "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-      posterUrl: "https://i.ibb.co/yp2wzRq/movie1.jpg",
-      ownerId: "movieOwnerId", // added ownerId
-    };
-    setMovie(dummyMovie);
-    setLoading(false);
+
+   
   }, [id]);
 
-  const handleAddToWatchlist = () => {
-    // 🔹 In production, call backend to add movie to user's watchlist
-    setWatchlistAdded(true);
-  };
+const handleAddToWatchlist = async (movie) => {
+  try {
+
+    const userEmail = user?.email || "guest@example.com"; 
+
+    const watchlistItem = {
+       movieId: movie._id,
+      title: movie.title,
+      posterUrl: movie.posterUrl || movie.image,
+      genre: movie.genre,
+      rating: movie.rating,
+      releaseYear: movie.releaseYear,
+      userEmail: userEmail,
+
+      addedAt: new Date().toISOString(),
+    };
+
+    const response = await fetch(`http://localhost:3000/watchlist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(watchlistItem),
+    });
+
+    const data = await response.json();
+
+    if (data.insertedId) {
+      setWatchlistAdded(true);
+      toast.success(`${movie.title} added to watchlist!`);
+    } else {
+      toast.error("Failed to add to watchlist.");
+    }
+  } catch (error) {
+    console.error("Error adding to watchlist:", error);
+    toast.error("Something went wrong. Try again later.");
+  }
+  
+};
+
 
   if (loading || loadingMovie ) return <Loader />;
   if (!movie) return <p className="text-center mt-20">Movie not found</p>;
 
-  const isOwner = currentUser === movie.ownerId;
+  const isOwner = currentUser === movie?.addedBy;
 
   return (
     <div className="min-h-screen bg-base-100 dark:bg-base-200 py-12 mt-10 px-6 transition-colors duration-300">
@@ -126,7 +144,7 @@ const MovieDetails = () => {
                 ) : (
                   <button
                     className="bg-primary text-white px-5 py-2 rounded-xl hover:bg-primary/80 transition"
-                    onClick={handleAddToWatchlist}
+                    onClick={()=>{handleAddToWatchlist(movie)}}
                   >
                     Add to Watchlist
                   </button>

@@ -7,7 +7,7 @@ const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
 
   const handleViewDetails = () => {
-    navigate(`/movies/${movie.id}`); // dynamic route
+    navigate(`/movies/${movie._id}`); // dynamic route
   };
 
   return (
@@ -19,7 +19,7 @@ const MovieCard = ({ movie }) => {
       {/* Movie Poster */}
       <div className="relative">
         <img
-          src={movie.poster}
+          src={movie.posterUrl}
           alt={movie.title}
           className="w-full h-64 object-cover"
         />

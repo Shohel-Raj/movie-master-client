@@ -4,44 +4,42 @@ import { Link } from "react-router";
 const HeroSection = () => {
   // 🔹 Dummy featured movies
   const [featuredMovies, setFeaturedMovies] = useState([
-    {
-      id: 1,
-      title: "The Shadow Within",
-      description:
-        "A gripping mystery thriller exploring the thin line between truth and illusion.",
-      image:
-        "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1470&auto=format&fit=crop",
-      rating: 8.7,
-      genre: "Mystery / Thriller",
-    },
-    {
-      id: 2,
-      title: "Echoes of Tomorrow",
-      description:
-        "In a futuristic world, one scientist risks everything to change the past.",
-      image:
-        "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1470&auto=format&fit=crop",
-      rating: 9.0,
-      genre: "Sci-Fi / Drama",
-    },
-    {
-      id: 3,
-      title: "Lost Horizon",
-      description:
-        "An inspiring tale of survival, friendship, and the pursuit of dreams.",
-      image:
-        "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=1470&auto=format&fit=crop",
-      rating: 8.5,
-      genre: "Adventure / Drama",
-    },
+    // {
+    //   id: 1,
+    //   title: "The Shadow Within",
+    //   description:
+    //     "A gripping mystery thriller exploring the thin line between truth and illusion.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1470&auto=format&fit=crop",
+    //   rating: 8.7,
+    //   genre: "Mystery / Thriller",
+    // },
+    // {
+    //   id: 2,
+    //   title: "Echoes of Tomorrow",
+    //   description:
+    //     "In a futuristic world, one scientist risks everything to change the past.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?q=80&w=1470&auto=format&fit=crop",
+    //   rating: 9.0,
+    //   genre: "Sci-Fi / Drama",
+    // },
+    // {
+    //   id: 3,
+    //   title: "Lost Horizon",
+    //   description:
+    //     "An inspiring tale of survival, friendship, and the pursuit of dreams.",
+    //   image:
+    //     "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=1470&auto=format&fit=crop",
+    //   rating: 8.5,
+    //   genre: "Adventure / Drama",
+    // },
   ]);
-
-  // 🔹 Uncomment this when backend is ready
-  /*
+  
   useEffect(() => {
     const fetchFeaturedMovies = async () => {
       try {
-        const res = await fetch("https://your-backend-api.com/featured-movies");
+        const res = await fetch("http://localhost:3000/top-rated");
         const data = await res.json();
         setFeaturedMovies(data);
       } catch (error) {
@@ -50,7 +48,7 @@ const HeroSection = () => {
     };
     fetchFeaturedMovies();
   }, []);
-  */
+
 
   return (
     <div className="w-full rounded-lg overflow-hidden">
@@ -59,13 +57,13 @@ const HeroSection = () => {
           <div
             key={movie.id}
             id={`slide${index + 1}`}
-            className="carousel-item relative w-full transition-all duration-500"
+            className="carousel-item relative w-full transition-all duration-500 "
           >
             {/* 🎥 Background Image */}
             <div
               className="hero min-h-[65vh]"
               style={{
-                backgroundImage: `url(${movie.image})`,
+                backgroundImage: `url(${movie.posterUrl})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -79,7 +77,7 @@ const HeroSection = () => {
                     {movie.title}
                   </h1>
                   <p className="mb-5 text-gray-200 dark:text-gray-300">
-                    {movie.description}
+                    {movie.plotSummary}
                   </p>
 
                   <div className="flex justify-center gap-4 mb-5">
@@ -92,11 +90,11 @@ const HeroSection = () => {
                   </div>
 
                   <div className="flex justify-center gap-3">
-                    <Link to={`/movies/${movie.id}`} className="btn btn-primary">
+                    <Link to={`/movies/${movie._id}`} className="btn btn-primary">
                       🎬 Watch Now
                     </Link>
                     <Link
-                      to={`/movies/${movie.id}`}
+                      to={`/movies/${movie._id}`}
                       className="btn btn-outline text-white dark:text-base-content"
                     >
                       Learn More

@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Echoes of Tomorrow",
+    "genre": "Sci-Fi",
+    "releaseYear": "2024",
+    "director": "Liam Foster",
+    "cast": "Aria Bloom, Noah Clarke",
+    "rating": "8.7",
+    "duration": "128",
+    "plotSummary": "A time traveler struggles to fix a fractured timeline before reality collapses into chaos.",
+    "posterUrl": "https://i.postimg.cc/ZY8T8cdR/Echoes-of-Tomorrow.jpg",
+    "language": "English",
+    "country": "USA",
+    "addedBy": "kashem@gmail.com"
+  },
+  {
+    "title": "Whispers in the Fog",
+    "genre": "Mystery",
+    "releaseYear": "2022",
+    "director": "Sophia Lang",
+    "cast": "Ethan Cole, Grace Turner",
+    "rating": "8.2",
+    "duration": "115",
+    "plotSummary": "In a quiet coastal town, a detective uncovers secrets hidden beneath layers of mist and lies.",
+    "posterUrl": "https://i.postimg.cc/90Y5DGrm/Whispers-in-the-Fog.jpg",
+    "language": "English",
+    "country": "United Kingdom",
+    "addedBy": "kashem@gmail.com"
+  },
+  {
+    "title": "Crimson Horizon",
+    "genre": "Action",
+    "releaseYear": "2023",
+    "director": "Daniel Hayes",
+    "cast": "Lucas Grant, Mia Harper",
+    "rating": "9.1",
+    "duration": "132",
+    "plotSummary": "A rogue pilot must lead a desperate mission to prevent a global war ignited by a deadly satellite weapon.",
+    "posterUrl": "https://i.postimg.cc/J05VsbGM/Crimson-Horizon.jpg",
+    "language": "English",
+    "country": "Canada",
+    "addedBy": "kashem@gmail.com"
+  },
+  {
+    "title": "Silent Strings",
+    "genre": "Drama",
+    "releaseYear": "2021",
+    "director": "Isabella Moore",
+    "cast": "Liam Torres, Ava Bennett",
+    "rating": "8.5",
+    "duration": "124",
+    "plotSummary": "A deaf violinist rediscovers her passion for music through an unlikely friendship with a struggling composer.",
+    "posterUrl": "https://i.postimg.cc/ZnxtWrCT/Silent-Strings.jpg",
+    "language": "English",
+    "country": "France",
+    "addedBy": "kashem@gmail.com"
+  },
+  {
+    "title": "The Glass Kingdom",
+    "genre": "Thriller",
+    "releaseYear": "2024",
+    "director": "Oliver Brooks",
+    "cast": "Nina Walsh, Carter Blake",
+    "rating": "8.9",
+    "duration": "138",
+    "plotSummary": "In a city ruled by deception, a journalist risks everything to expose a conspiracy that could shatter the elite.",
+    "posterUrl": "https://i.postimg.cc/ZnxtWrCY/The-Glass-Kingdom.jpg",
+    "language": "English",
+    "country": "New Zealand",
+    "addedBy": "kashem@gmail.com"
+  }
+]

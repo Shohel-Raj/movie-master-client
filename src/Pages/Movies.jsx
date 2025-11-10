@@ -13,75 +13,34 @@ const Movies = () => {
 
   const genres = ["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Romance"];
 
+  
+
+  // 🔹 Fetch movies when filters change
   useEffect(() => {
-    setLoading(true);
+    // 🔹 Fetch movies from backend
+  const fetchMovies = async () => {
+    try {
+      setLoading(true);
 
-    // Simulate API fetch delay
-    setTimeout(() => {
-      // 🔹 Dummy data for now
-      const dummyMovies = [
-        {
-          _id: 1,
-          title: "The Infinite Sky",
-          genre: "Sci-Fi",
-          releaseYear: 2024,
-          rating: 8.5,
-          image: "https://i.ibb.co/yp2wzRq/movie1.jpg",
-        },
-        {
-          _id: 2,
-          title: "Love & Echoes",
-          genre: "Romance",
-          releaseYear: 2023,
-          rating: 7.9,
-          image: "https://i.ibb.co/M1PtVHz/movie2.jpg",
-        },
-        {
-          _id: 3,
-          title: "Silent Storm",
-          genre: "Action",
-          releaseYear: 2022,
-          rating: 9.1,
-          image: "https://i.ibb.co/qmDfWzB/movie3.jpg",
-        },
-        {
-          _id: 4,
-          title: "Haunted Hollow",
-          genre: "Horror",
-          releaseYear: 2021,
-          rating: 8.2,
-          image: "https://i.ibb.co/vhqzJZL/movie4.jpg",
-        },
-        {
-          _id: 5,
-          title: "Comedy Chaos",
-          genre: "Comedy",
-          releaseYear: 2020,
-          rating: 7.4,
-          image: "https://i.ibb.co/Jcv6JQ9/movie5.jpg",
-        },
-        {
-          _id: 6,
-          title: "Tears of Time",
-          genre: "Drama",
-          releaseYear: 2023,
-          rating: 8.9,
-          image: "https://i.ibb.co/M1PtVHz/movie6.jpg",
-        },
-      ];
+      const queryParams = new URLSearchParams();
 
-      // Filter movies based on selectedGenre & ratingRange
-      const filteredMovies = dummyMovies.filter(
-        (movie) =>
-          (selectedGenre ? movie.genre === selectedGenre : true) &&
-          movie.rating >= ratingRange[0] &&
-          movie.rating <= ratingRange[1]
-      );
+      if (selectedGenre) queryParams.append("genre", selectedGenre);
+      if (ratingRange[0] > 0) queryParams.append("minRating", ratingRange[0]);
+      if (ratingRange[1] < 10) queryParams.append("maxRating", ratingRange[1]);
 
-      setMovies(filteredMovies);
+      const res = await fetch(`http://localhost:3000/movies?${queryParams.toString()}`);
+      const data = await res.json();
+
+      setMovies(data);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    } finally {
       setLoading(false);
-    }, 1000); // 1 second delay to simulate fetch
+    }
+  };
+    fetchMovies();
   }, [selectedGenre, ratingRange]);
+
 
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);

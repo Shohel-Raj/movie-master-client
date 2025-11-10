@@ -1,32 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaFilm, FaUsers, FaStar, FaMedal } from "react-icons/fa";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 
 const StatisticsSection = () => {
-  const [stats, setStats] = useState({
-    totalMovies: 245,
-    totalUsers: 85,
-    topRatedMovie: 9.0, // rating as number for animation
-    awardsWon: 12,
-  });
+  const [stats, setStats] = useState({});
 
   const { ref, inView } = useInView({
     threshold: 0.3,
     triggerOnce: true,
   });
 
-  // 🔹 Replace with backend API fetch if needed
-  /*
+
   useEffect(() => {
     const fetchStats = async () => {
-      const res = await fetch("https://your-backend-api.com/stats");
+      const res = await fetch("http://localhost:3000/api/stats");
       const data = await res.json();
       setStats(data);
     };
     fetchStats();
   }, []);
-  */
+
 
   const statItems = [
     {
