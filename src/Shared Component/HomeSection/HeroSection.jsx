@@ -39,7 +39,7 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchFeaturedMovies = async () => {
       try {
-        const res = await fetch("http://localhost:3000/top-rated");
+        const res = await fetch("https://moviemaster-backend.vercel.app/top-rated");
         const data = await res.json();
         setFeaturedMovies(data);
       } catch (error) {

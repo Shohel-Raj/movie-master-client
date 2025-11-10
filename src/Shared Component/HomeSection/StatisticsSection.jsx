@@ -14,7 +14,7 @@ const StatisticsSection = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
-      const res = await fetch("http://localhost:3000/api/stats");
+      const res = await fetch("https://moviemaster-backend.vercel.app/api/stats");
       const data = await res.json();
       setStats(data);
     };

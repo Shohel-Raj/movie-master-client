@@ -15,7 +15,7 @@ const MovieDetails = () => {
   const currentUser = user?.email; 
   useEffect(() => {
 
-    fetch(`http://localhost:3000/movies/${id}`)
+    fetch(`https://moviemaster-backend.vercel.app/movies/${id}`)
       .then(res => res.json())
       .then(data => setMovie(data))
       .catch(err => console.error("Error fetching movie details"))
@@ -42,7 +42,7 @@ const handleAddToWatchlist = async (movie) => {
       addedAt: new Date().toISOString(),
     };
 
-    const response = await fetch(`http://localhost:3000/watchlist`, {
+    const response = await fetch(`https://moviemaster-backend.vercel.app/watchlist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

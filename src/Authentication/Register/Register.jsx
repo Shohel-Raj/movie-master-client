@@ -13,7 +13,7 @@ const Register = () => {
   const saveUserToDB = async (userData) => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL || "http://localhost:3000"}/users/${userData.email}`,
+        `${import.meta.env.VITE_API_URL || "https://moviemaster-backend.vercel.app"}/users/${userData.email}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

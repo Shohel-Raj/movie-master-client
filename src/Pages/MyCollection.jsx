@@ -15,7 +15,7 @@ const MyCollection = () => {
   useEffect(() => {
     // 🔹 Uncomment when backend is ready
     
-    fetch(`http://localhost:3000/my-collection/${user?.email}`)
+    fetch(`https://moviemaster-backend.vercel.app/my-collection/${user?.email}`)
       .then(res => res.json())
       .then(data => setMovies(data))
       .catch(err => console.error(err));
@@ -26,7 +26,7 @@ const MyCollection = () => {
 
   const handleDelete = (id) => {
  
-    fetch(`http://localhost:3000/movies/${id}`, { method: "DELETE" })
+    fetch(`https://moviemaster-backend.vercel.app/movies/${id}`, { method: "DELETE" })
       .then(res => res.json())
       .then(() => {
         setMovies(prev => prev.filter(movie => movie._id !== id));

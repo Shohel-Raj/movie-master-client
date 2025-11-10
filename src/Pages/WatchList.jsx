@@ -13,7 +13,7 @@ const WatchList = () => {
   useEffect(() => {
    
     
-    fetch(`http://localhost:3000/watchlist/${user?.email}`)
+    fetch(`https://moviemaster-backend.vercel.app/watchlist/${user?.email}`)
       .then(res => res.json())
       .then(data => setWatchlist(data))
       .catch(err => console.error(err));
@@ -83,7 +83,7 @@ const WatchList = () => {
 
   const handleRemove = (id) => {
 
-    fetch(`http://localhost:3000/watchlist/${id}`, { method: "DELETE" })
+    fetch(`https://moviemaster-backend.vercel.app/watchlist/${id}`, { method: "DELETE" })
       .then(res => res.json())
       .then(() => {
         setWatchlist(prev => prev.filter(movie => movie._id !== id));

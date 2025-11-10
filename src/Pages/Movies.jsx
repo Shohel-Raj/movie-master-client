@@ -28,7 +28,7 @@ const Movies = () => {
       if (ratingRange[0] > 0) queryParams.append("minRating", ratingRange[0]);
       if (ratingRange[1] < 10) queryParams.append("maxRating", ratingRange[1]);
 
-      const res = await fetch(`http://localhost:3000/movies?${queryParams.toString()}`);
+      const res = await fetch(`https://moviemaster-backend.vercel.app/movies?${queryParams.toString()}`);
       const data = await res.json();
 
       setMovies(data);

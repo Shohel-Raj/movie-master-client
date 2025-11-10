@@ -17,7 +17,7 @@ const TopRatedMovies = () => {
   useEffect(() => {
     const fetchTopMovies = async () => {
       try {
-        const res = await fetch("http://localhost:3000/top-rated");
+        const res = await fetch("https://moviemaster-backend.vercel.app/top-rated");
         const data = await res.json();
         setMovies(data.slice(0, 6));
       } catch (err) {

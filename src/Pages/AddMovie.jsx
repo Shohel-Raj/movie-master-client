@@ -39,7 +39,7 @@ const AddMovie = () => {
     setTimeout(() => {
       // 🔹 Uncomment for real backend submission
 
-      fetch("http://localhost:3000/movies", {
+      fetch("https://moviemaster-backend.vercel.app/movies", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToSubmit),
