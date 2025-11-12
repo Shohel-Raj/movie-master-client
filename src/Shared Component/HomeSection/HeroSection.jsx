@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
+import Loader from "../Loader/Loader";
 
 const HeroSection = () => {
   // 🔹 Dummy featured movies
@@ -35,21 +36,29 @@ const HeroSection = () => {
     //   genre: "Adventure / Drama",
     // },
   ]);
-  
+  const [loadingstate, setLoadingstate] = useState(false);
+
   useEffect(() => {
+    setLoadingstate(true)
     const fetchFeaturedMovies = async () => {
       try {
-        const res = await fetch("https://moviemaster-backend.vercel.app/top-rated");
+        const res = await fetch(
+          "https://moviemaster-backend.vercel.app/top-rated"
+        );
         const data = await res.json();
         setFeaturedMovies(data);
+        setLoadingstate(false)
       } catch (error) {
         console.error("Error fetching featured movies:", error);
+        setLoadingstate(false)
       }
     };
     fetchFeaturedMovies();
   }, []);
 
-
+  if (loadingstate) {
+    return <Loader />;
+  }
   return (
     <div className="w-full rounded-lg overflow-hidden">
       <div className="carousel w-full">
@@ -81,16 +90,17 @@ const HeroSection = () => {
                   </p>
 
                   <div className="flex justify-center gap-4 mb-5">
-                    <span className="badge badge-outline ">
-                      {movie.genre}
-                    </span>
+                    <span className="badge badge-outline ">{movie.genre}</span>
                     <span className="badge  badge-primary">
                       ⭐ {movie.rating}
                     </span>
                   </div>
 
                   <div className="flex justify-center gap-3">
-                    <Link to={`/movies/${movie._id}`} className="btn btn-primary">
+                    <Link
+                      to={`/movies/${movie._id}`}
+                      className="btn btn-primary"
+                    >
                       🎬 Watch Now
                     </Link>
                     <Link

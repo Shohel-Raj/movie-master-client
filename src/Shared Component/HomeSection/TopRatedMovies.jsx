@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 import MovieCard from "../MovieCard";
+import Loader from "../Loader/Loader";
 
 const TopRatedMovies = () => {
   const [movies, setMovies] = useState([ ]);
+  const [loadingstate,setLoadingstate]=useState(true)
 
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -15,18 +17,23 @@ const TopRatedMovies = () => {
  
 
   useEffect(() => {
+    setLoadingstate(true)
     const fetchTopMovies = async () => {
       try {
         const res = await fetch("https://moviemaster-backend.vercel.app/top-rated");
         const data = await res.json();
         setMovies(data.slice(0, 6));
+        setLoadingstate(false)
       } catch (err) {
         console.error("Error fetching movies:", err);
+        setLoadingstate(false)
       }
     };
     fetchTopMovies();
   }, []);
-
+if(loadingstate){
+  return <Loader/>
+}
 
   return (
     <section
